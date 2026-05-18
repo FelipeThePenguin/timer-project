@@ -27,6 +27,11 @@ export function Controls({
   }
   
   function toggleButton() {
+    if (currentSeconds < 5 && !timerFinished) {
+      alert('Timer must last longer than 5 seconds');
+      return;
+    }
+    
     if (!allowTimer) {
       alert('Please enter a whole number in the inputs between 0-99');
       return;

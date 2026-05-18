@@ -39,9 +39,9 @@ function isFloat(n){
       }
     }
     
-    setAllowTimer(true);
     const totalSeconds = Number(hourValue) * 3600 + Number(minuteValue) * 60 + Number(secondValue);
     setTotalSeconds(totalSeconds);
+    setAllowTimer(true);
   }
   
   return (
