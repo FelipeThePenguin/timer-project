@@ -15,7 +15,12 @@ function formatTime(totalSeconds) {
   return `${hourString}:${minuteString}:${secondString}`;
 }
 
-export function Timer({ totalSeconds, setTotalSeconds, timerPlaying, timerOngoing, timerFinished }) {
+export function Timer({ 
+  totalSeconds, 
+  setTotalSeconds, 
+  timerPlaying,
+  timerFinished, 
+  setAllowTimer }) {
   return (
    <div>
      {timerPlaying 
@@ -24,7 +29,9 @@ export function Timer({ totalSeconds, setTotalSeconds, timerPlaying, timerOngoin
           ? 'Timer has expired'
           : formatTime(totalSeconds)}
         </p>
-      : <Input setTotalSeconds={setTotalSeconds}/>
+      : <Input 
+          setTotalSeconds={setTotalSeconds}
+          setAllowTimer={setAllowTimer}/>
      }
    </div>
   );

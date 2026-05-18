@@ -3,12 +3,12 @@ import { useState } from 'react';
 export function Controls({ 
   totalSeconds,
   setTotalSeconds,
-  timerPlaying,
   setTimerPlaying,
   timerOngoing,
   setTimerOngoing,
   setTimerFinished,
-  timerFinished
+  timerFinished,
+  allowTimer
 }) {
   const [intervalId, setIntervalId] = useState(0);
   let interval;
@@ -17,7 +17,6 @@ export function Controls({
   function resetValues() {
     
     if (timerFinished) {
-      console.log('I will go to input');
       setTimerPlaying(false);
       setTimerFinished(false);
       return;
@@ -25,11 +24,14 @@ export function Controls({
     
     clearInterval(interval ?? intervalId);
     setTimerOngoing(false);
-    console.log('Timer has Finished:', timerFinished);
-    console.log('I have reset:', interval, intervalId);
   }
   
   function toggleButton() {
+    if (!allowTimer) {
+      alert('Please enter a whole number in the inputs between 0-99');
+      return;
+    }
+    
     if (timerFinished) {
       setTimerPlaying(false);
       setTimerFinished(false);
@@ -41,7 +43,6 @@ export function Controls({
     
     if (timerOngoing) {
       clearInterval(intervalId);
-      console.log('I cleared:', intervalId);
       return;
     }
     
@@ -55,7 +56,6 @@ export function Controls({
       }
     }, 1000);
     setIntervalId(interval);
-    console.log("Made interval: ", interval);
   }
   
   function restartTimer() {
