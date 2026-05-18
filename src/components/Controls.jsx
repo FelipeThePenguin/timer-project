@@ -6,22 +6,36 @@ export function Controls({
   timerPlaying,
   setTimerPlaying,
   timerOngoing,
-  setTimerOngoing
+  setTimerOngoing,
+  setTimerFinished,
+  timerFinished
 }) {
   const [intervalId, setIntervalId] = useState(0);
   let interval;
   let currentSeconds = totalSeconds;
   
   function resetValues() {
+    
+    if (timerFinished) {
+      console.log('I will go to input');
+      setTimerPlaying(false);
+      setTimerFinished(false);
+      return;
+    }
+    
     clearInterval(interval ?? intervalId);
-    currentSeconds = 0;
-    setTotalSeconds(0);
-    setTimerPlaying(false);
     setTimerOngoing(false);
+    console.log('Timer has Finished:', timerFinished);
     console.log('I have reset:', interval, intervalId);
   }
   
   function toggleButton() {
+    if (timerFinished) {
+      setTimerPlaying(false);
+      setTimerFinished(false);
+      return;
+    }
+    
     setTimerPlaying(true);
     setTimerOngoing(timerOngoing ? false : true);
     
@@ -37,7 +51,7 @@ export function Controls({
       
       if (currentSeconds === 0) {
         resetValues();
-        alert('Timer has expired');
+        setTimerFinished(true);
       }
     }, 1000);
     setIntervalId(interval);
@@ -46,6 +60,7 @@ export function Controls({
   
   function restartTimer() {
     resetValues();
+    setTimerPlaying(false);
   }
   
   return (

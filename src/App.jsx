@@ -7,6 +7,7 @@ function App() {
   const [totalSeconds, setTotalSeconds] = useState(0);
   const [timerPlaying, setTimerPlaying] = useState(false);
   const [timerOngoing, setTimerOngoing] = useState(false);
+  const [timerFinished, setTimerFinished] = useState(false);
   
   return (
     <div>
@@ -15,6 +16,7 @@ function App() {
       setTotalSeconds={setTotalSeconds}
       timerPlaying={timerPlaying}
       timerOngoing={timerOngoing}
+      timerFinished={timerFinished}
       />
       <Controls 
        totalSeconds={totalSeconds}
@@ -23,6 +25,8 @@ function App() {
        timerPlaying={timerPlaying}
        timerOngoing={timerOngoing}
        setTimerOngoing={setTimerOngoing}
+       setTimerFinished={setTimerFinished}
+       timerFinished={timerFinished}
       />
     </div>
   );

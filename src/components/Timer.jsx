@@ -15,11 +15,15 @@ function formatTime(totalSeconds) {
   return `${hourString}:${minuteString}:${secondString}`;
 }
 
-export function Timer({ totalSeconds, setTotalSeconds, timerPlaying, timerOngoing }) {
+export function Timer({ totalSeconds, setTotalSeconds, timerPlaying, timerOngoing, timerFinished }) {
   return (
    <div>
      {timerPlaying 
-      ? <p>{formatTime(totalSeconds)}</p>
+      ? <p>
+         {timerFinished
+          ? 'Timer has expired'
+          : formatTime(totalSeconds)}
+        </p>
       : <Input setTotalSeconds={setTotalSeconds}/>
      }
    </div>
