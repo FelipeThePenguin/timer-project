@@ -1,16 +1,19 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export function Controls({ 
-  totalSeconds,
-  setTotalSeconds,
-  setTimerPlaying,
-  timerOngoing,
-  setTimerOngoing,
-  setTimerFinished,
-  timerFinished,
-  allowTimer
-}) {
+    totalSeconds,
+    setTotalSeconds,
+    setTimerPlaying,
+    timerPlaying,
+    timerOngoing,
+    setTimerOngoing,
+    setTimerFinished,
+    timerFinished,
+    allowTimer
+  }) {
   const [intervalId, setIntervalId] = useState(0);
+  const audioInput = useRef(null);
+  const audioElem = useRef(null);
   let interval;
   let currentSeconds = totalSeconds;
   
@@ -24,10 +27,11 @@ export function Controls({
     
     clearInterval(interval ?? intervalId);
     setTimerOngoing(false);
+    audioElem.current.currentTime = 0;
   }
   
   function toggleButton() {
-    if (currentSeconds < 5 && !timerFinished) {
+    if (currentSeconds < 5 && !timerFinished && !timerOngoing && !timerPlaying) {
       alert('Timer must last longer than 5 seconds');
       return;
     }
@@ -40,6 +44,7 @@ export function Controls({
     if (timerFinished) {
       setTimerPlaying(false);
       setTimerFinished(false);
+      audioElem.current.play().then(() => {audioElem.current.pause()});
       return;
     }
     
@@ -58,6 +63,7 @@ export function Controls({
       if (currentSeconds === 0) {
         resetValues();
         setTimerFinished(true);
+        audioElem.current.play();
       }
     }, 1000);
     setIntervalId(interval);
@@ -66,13 +72,46 @@ export function Controls({
   function restartTimer() {
     resetValues();
     setTimerPlaying(false);
+    audioElem.current.play().then(() => {audioElem.current.pause()});
+  }
+  
+  function changeAudio() {
+    const audioFile = audioInput.current.files[0];
+    // const blob = new Blob([audioFile], {type: "audio/*"});
+    const reader = new FileReader();
+    
+    reader.onload = () => {
+      audioElem.current.src = reader.result;
+    };
+    
+    reader.readAsDataURL(audioFile);
+  };
+  
+  function setSound() {
+    if (timerOngoing) {
+      console.log('Pause the timer first before adding an alarm sound');
+      return;
+    }
+    
+    audioInput.current.click();
   }
   
   return (
     <div>
       <button onClick={restartTimer}>Restart</button>
       <button onClick={toggleButton}>Play</button>
-      <button>Sound</button>
+      <button onClick={setSound}>Sound</button>
+      <input 
+       type="file" 
+       allow="audio/*" 
+       style={{display: 'none'}}
+       ref={audioInput}
+       onChange={changeAudio}
+      />
+      <audio 
+       loop
+       ref={audioElem}
+      />
     </div>
   );
 }

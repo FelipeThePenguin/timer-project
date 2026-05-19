@@ -26,6 +26,7 @@ function App() {
        totalSeconds={totalSeconds}
        setTotalSeconds={setTotalSeconds}
        setTimerPlaying={setTimerPlaying}
+       timerPlaying={timerPlaying}
        timerOngoing={timerOngoing}
        setTimerOngoing={setTimerOngoing}
        setTimerFinished={setTimerFinished}
