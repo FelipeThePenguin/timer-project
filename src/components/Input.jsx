@@ -1,4 +1,6 @@
 import { useRef, useState } from 'react';
+import './Input.css';
+import { isFloat } from '../utils/types'
 
 export function Input({ setTotalSeconds, setAllowTimer }) {
   const [timeValue, setTimeValue] = useState({
@@ -9,10 +11,6 @@ export function Input({ setTotalSeconds, setAllowTimer }) {
   const hourInput = useRef(null);
   const minuteInput = useRef(null);
   const secondInput = useRef(null);
-  
-function isFloat(n){
-    return Number(n) === n && n % 1 !== 0;
-}
   
   function getValues() {
     const hourValue = hourInput.current.value;
@@ -45,7 +43,7 @@ function isFloat(n){
   }
   
   return (
-   <>
+   <div className="input-container">
      <input 
       type="number"
       placeholder="Hour"
@@ -67,6 +65,6 @@ function isFloat(n){
       ref={secondInput}
       onChange={getValues}
      />
-   </>
+   </div>
   );
 }

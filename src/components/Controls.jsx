@@ -9,12 +9,14 @@ export function Controls({
     setTimerOngoing,
     setTimerFinished,
     timerFinished,
-    allowTimer
+    allowTimer,
+    setMilliseconds
   }) {
   const [intervalId, setIntervalId] = useState(0);
   const audioInput = useRef(null);
   const audioElem = useRef(null);
   let interval;
+  let loopMs = 0;
   let currentSeconds = totalSeconds;
   
   function resetValues() {
@@ -28,6 +30,8 @@ export function Controls({
     clearInterval(interval ?? intervalId);
     setTimerOngoing(false);
     audioElem.current.currentTime = 0;
+    loopMs = 0;
+    setMilliseconds(0);
   }
   
   function toggleButton() {
@@ -57,15 +61,23 @@ export function Controls({
     }
     
       interval = setInterval(() => {
+      if (loopMs !== 200) {
+        loopMs++;
+        setMilliseconds(totalSeconds - loopMs * 5);
+        return;
+      }
+        
       currentSeconds--;
       setTotalSeconds(currentSeconds);
+      loopMs = 0;
+      setMilliseconds(0);
       
       if (currentSeconds === 0) {
         resetValues();
         setTimerFinished(true);
         audioElem.current.play();
       }
-    }, 1000);
+    }, 5);
     setIntervalId(interval);
   }
   
