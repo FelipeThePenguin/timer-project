@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 
 export function Controls({ 
     totalMs,
@@ -9,28 +9,28 @@ export function Controls({
     timerFinished,
     allowTimer
   }) {
-  const [intervalId, setIntervalId] = useState(0);
-  const [timerOngoing, setTimerOngoing] = useState(false);
   const audioInput = useRef(null);
   const audioElem = useRef(null);
-  let interval;
+  let interval = useRef(undefined);
   let currentMs = totalMs;
   
   function resetValues() {
-    
     if (timerFinished) {
       setTimerPlaying(false);
       setTimerFinished(false);
       return;
     }
     
-    clearInterval(interval ?? intervalId);
-    setTimerOngoing(false);
+    clearInterval(interval.current);
+    console.log(`I cleared interval: ${interval.current} from Reset Function`);
+    interval.current = undefined;
     audioElem.current.currentTime = 0;
   }
   
   function toggleButton() {
-    if (currentMs < 5000 && !timerFinished && !timerOngoing && !timerPlaying) {
+    const currentInterval = interval.current;
+    
+    if (currentMs < 5000 && !timerFinished && !currentInterval && !timerPlaying) {
       alert('Timer must last longer than 5 seconds');
       return;
     }
@@ -48,14 +48,18 @@ export function Controls({
     }
     
     setTimerPlaying(true);
-    setTimerOngoing(timerOngoing ? false : true);
+    console.log("Looking for:", interval.current);
     
-    if (timerOngoing) {
-      clearInterval(intervalId);
+    if (interval.current) {
+      clearInterval(interval.current);
+      console.log("I cleared interval:", interval.current, "from If statement");
+      interval.current = undefined;
       return;
     }
     
-      interval = setInterval(() => {
+    interval.current = currentInterval ? false : true;
+    
+    interval.current = setInterval(() => {
       currentMs -= 5;
       setTotalMs(currentMs);
 
@@ -63,9 +67,10 @@ export function Controls({
         resetValues();
         setTimerFinished(true);
         audioElem.current.play();
+        interval.current = undefined;
       }
     }, 5);
-    setIntervalId(interval);
+    console.log("Created interval:", interval.current);
   }
   
   function restartTimer() {
@@ -84,11 +89,10 @@ export function Controls({
   };
   
   function setSound() {
-    if (timerOngoing) {
+    if (interval.current) {
       console.log('Pause the timer first before adding an alarm sound');
       return;
     }
-    
     audioInput.current.click();
   }
   
