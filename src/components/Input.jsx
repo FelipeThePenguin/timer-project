@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import './Input.css';
 import { isFloat } from '../utils/types'
 
-export function Input({ setTotalSeconds, setAllowTimer }) {
+export function Input({ setTotalMs, setAllowTimer }) {
   const [timeValue, setTimeValue] = useState({
     hourValue: '',
     minuteValue: '',
@@ -38,7 +38,7 @@ export function Input({ setTotalSeconds, setAllowTimer }) {
     }
     
     const totalSeconds = Number(hourValue) * 3600 + Number(minuteValue) * 60 + Number(secondValue);
-    setTotalSeconds(totalSeconds);
+    setTotalMs(totalSeconds * 1000);
     setAllowTimer(true);
   }
   

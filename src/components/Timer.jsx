@@ -4,23 +4,22 @@ import './Timer.css';
 import { formatTime } from '../utils/formatTime';
 
 export function Timer({ 
-  totalSeconds, 
-  setTotalSeconds, 
+  totalMs, 
+  setTotalMs, 
   timerPlaying,
   timerFinished, 
-  setAllowTimer,
-  milliseconds}) {
+  setAllowTimer,}) {
   const wheel = useRef(null);
   const spinner = useRef(null);
-  let originalTotalSeconds = useRef(totalSeconds);
+  let originalTotalMs = useRef(totalMs);
   
   useEffect(() => {
-    originalTotalSeconds.current = totalSeconds;
+    originalTotalMs.current = totalMs;
   }, [timerPlaying]);
   
   useEffect(() => {
-    const timeLapsed = totalSeconds * 1000 + milliseconds;
-    const percentage = (timeLapsed / (originalTotalSeconds.current * 1000)) * 100;
+    const timeLapsed = totalMs;
+    const percentage = (timeLapsed / originalTotalMs.current) * 100;
     
     wheel.current.style.backgroundImage = `
      conic-gradient(
@@ -31,10 +30,10 @@ export function Timer({
     
     spinner.current.style.rotate = `${percentage * 3.6}deg`;
     
-    if (totalSeconds === 0) {
+    if (totalMs === 0) {
       wheel.current.style.background = 'transparent';
     }
-  }, [milliseconds]);
+  }, [totalMs]);
     
   return (
   <div className="wheel" ref={wheel}>
@@ -43,10 +42,10 @@ export function Timer({
       ? <p>
          {timerFinished
           ? 'Timer has expired'
-          : formatTime(totalSeconds)}
+          : formatTime(totalMs)}
         </p>
       : <Input 
-          setTotalSeconds={setTotalSeconds}
+          setTotalMs={setTotalMs}
           setAllowTimer={setAllowTimer}/>
      }
     </div>

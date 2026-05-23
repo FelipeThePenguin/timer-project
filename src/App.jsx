@@ -4,34 +4,28 @@ import { Timer } from './components/Timer';
 import { Controls } from './components/Controls';
 
 function App() {
-  const [totalSeconds, setTotalSeconds] = useState(0);
+  const [totalMs, setTotalMs] = useState(0);
   const [timerPlaying, setTimerPlaying] = useState(false);
-  const [timerOngoing, setTimerOngoing] = useState(false);
   const [timerFinished, setTimerFinished] = useState(false);
   const [allowTimer, setAllowTimer] = useState(true);
-  const [milliseconds, setMilliseconds] = useState(0);
   
   return (
     <div className="app-container">
       <Timer 
-      totalSeconds={totalSeconds}
-      setTotalSeconds={setTotalSeconds}
+      totalMs={totalMs}
+      setTotalMs={setTotalMs}
       timerPlaying={timerPlaying}
       timerFinished={timerFinished}
       setAllowTimer={setAllowTimer}
-      milliseconds={milliseconds}
       />
       <Controls 
-       totalSeconds={totalSeconds}
-       setTotalSeconds={setTotalSeconds}
+       totalMs={totalMs}
+       setTotalMs={setTotalMs}
        setTimerPlaying={setTimerPlaying}
        timerPlaying={timerPlaying}
-       timerOngoing={timerOngoing}
-       setTimerOngoing={setTimerOngoing}
        setTimerFinished={setTimerFinished}
        timerFinished={timerFinished}
        allowTimer={allowTimer}
-       setMilliseconds={setMilliseconds}
       />
     </div>
   );

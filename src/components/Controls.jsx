@@ -1,23 +1,20 @@
 import { useState, useRef } from 'react';
 
 export function Controls({ 
-    totalSeconds,
-    setTotalSeconds,
+    totalMs,
+    setTotalMs,
     setTimerPlaying,
     timerPlaying,
-    timerOngoing,
-    setTimerOngoing,
     setTimerFinished,
     timerFinished,
-    allowTimer,
-    setMilliseconds
+    allowTimer
   }) {
   const [intervalId, setIntervalId] = useState(0);
+  const [timerOngoing, setTimerOngoing] = useState(false);
   const audioInput = useRef(null);
   const audioElem = useRef(null);
   let interval;
-  let loopMs = 0;
-  let currentSeconds = totalSeconds;
+  let currentMs = totalMs;
   
   function resetValues() {
     
@@ -30,12 +27,10 @@ export function Controls({
     clearInterval(interval ?? intervalId);
     setTimerOngoing(false);
     audioElem.current.currentTime = 0;
-    loopMs = 0;
-    setMilliseconds(0);
   }
   
   function toggleButton() {
-    if (currentSeconds < 5 && !timerFinished && !timerOngoing && !timerPlaying) {
+    if (currentMs < 5000 && !timerFinished && !timerOngoing && !timerPlaying) {
       alert('Timer must last longer than 5 seconds');
       return;
     }
@@ -61,18 +56,10 @@ export function Controls({
     }
     
       interval = setInterval(() => {
-      if (loopMs !== 200) {
-        loopMs++;
-        setMilliseconds(totalSeconds - loopMs * 5);
-        return;
-      }
-        
-      currentSeconds--;
-      setTotalSeconds(currentSeconds);
-      loopMs = 0;
-      setMilliseconds(0);
-      
-      if (currentSeconds === 0) {
+      currentMs -= 5;
+      setTotalMs(currentMs);
+
+      if (currentMs === 0) {
         resetValues();
         setTimerFinished(true);
         audioElem.current.play();
@@ -89,13 +76,10 @@ export function Controls({
   
   function changeAudio() {
     const audioFile = audioInput.current.files[0];
-    // const blob = new Blob([audioFile], {type: "audio/*"});
     const reader = new FileReader();
-    
     reader.onload = () => {
       audioElem.current.src = reader.result;
     };
-    
     reader.readAsDataURL(audioFile);
   };
   
