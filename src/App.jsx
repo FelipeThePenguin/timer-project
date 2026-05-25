@@ -27,6 +27,7 @@ function App() {
        setTimerFinished={setTimerFinished}
        timerFinished={timerFinished}
        timerValues={timerValues}
+       setTimerValues={setTimerValues}
       />
     </div>
   );

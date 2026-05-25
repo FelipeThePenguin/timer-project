@@ -8,7 +8,8 @@ export function Controls({
     timerPlaying,
     setTimerFinished,
     timerFinished,
-    timerValues
+    timerValues,
+    setTimerValues
   }) {
   const audioInput = useRef(null);
   const audioElem = useRef(null);
@@ -16,19 +17,23 @@ export function Controls({
   let currentMs = useRef(undefined);
   
   function resetValues() {
-    if (timerFinished) {
-      setTimerPlaying(false);
-      setTimerFinished(false);
-      return;
-    }
+    setTimerPlaying(false);
+    setTimerFinished(false);
+    audioElem.current.play().then(() => {audioElem.current.pause()});
     
     clearInterval(interval.current);
     interval.current = undefined;
     currentMs.current = undefined;
     audioElem.current.currentTime = 0;
+    setTimerValues({});
   }
   
   function toggleButton() {
+    if (timerFinished) {
+      resetValues();
+      return;
+    }
+    
     const currentInterval = interval.current;
     const timer = checkTimer(timerValues);
     
@@ -39,13 +44,6 @@ export function Controls({
     
     currentMs.current = currentMs.current ?? timer.value;
     setTimerPlaying(true);
-    
-    if (timerFinished) {
-      setTimerPlaying(false);
-      setTimerFinished(false);
-      audioElem.current.play().then(() => {audioElem.current.pause()});
-      return;
-    }
     
     if (interval.current) {
       clearInterval(interval.current);
@@ -58,18 +56,12 @@ export function Controls({
       setTotalMs(currentMs.current);
 
       if (currentMs.current === 0) {
-        resetValues();
         setTimerFinished(true);
         audioElem.current.play();
+        clearInterval(interval.current);
         interval.current = undefined;
       }
     }, 5);
-  }
-  
-  function restartTimer() {
-    resetValues();
-    setTimerPlaying(false);
-    audioElem.current.play().then(() => {audioElem.current.pause()});
   }
   
   function changeAudio() {
@@ -91,7 +83,7 @@ export function Controls({
   
   return (
     <div>
-      <button onClick={restartTimer}>Restart</button>
+      <button onClick={resetValues}>Restart</button>
       <button onClick={toggleButton}>Play</button>
       <button onClick={setSound}>Sound</button>
       <input 
