@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { checkTimer } from '../utils/timerAllowed.js';
 
 export function Controls({ 
     totalMs,
@@ -7,12 +8,12 @@ export function Controls({
     timerPlaying,
     setTimerFinished,
     timerFinished,
-    allowTimer
+    timerValues
   }) {
   const audioInput = useRef(null);
   const audioElem = useRef(null);
   let interval = useRef(undefined);
-  let currentMs = totalMs;
+  let currentMs = useRef(undefined);
   
   function resetValues() {
     if (timerFinished) {
@@ -22,23 +23,22 @@ export function Controls({
     }
     
     clearInterval(interval.current);
-    console.log(`I cleared interval: ${interval.current} from Reset Function`);
     interval.current = undefined;
+    currentMs.current = undefined;
     audioElem.current.currentTime = 0;
   }
   
   function toggleButton() {
     const currentInterval = interval.current;
+    const timer = checkTimer(timerValues);
     
-    if (currentMs < 5000 && !timerFinished && !currentInterval && !timerPlaying) {
-      alert('Timer must last longer than 5 seconds');
+    if (!timer.isAllowed) {
+      alert(timer.reason);
       return;
     }
     
-    if (!allowTimer) {
-      alert('Please enter a whole number in the inputs between 0-99');
-      return;
-    }
+    currentMs.current = currentMs.current ?? timer.value;
+    setTimerPlaying(true);
     
     if (timerFinished) {
       setTimerPlaying(false);
@@ -47,30 +47,23 @@ export function Controls({
       return;
     }
     
-    setTimerPlaying(true);
-    console.log("Looking for:", interval.current);
-    
     if (interval.current) {
       clearInterval(interval.current);
-      console.log("I cleared interval:", interval.current, "from If statement");
       interval.current = undefined;
       return;
     }
     
-    interval.current = currentInterval ? false : true;
-    
     interval.current = setInterval(() => {
-      currentMs -= 5;
-      setTotalMs(currentMs);
+      currentMs.current -= 5;
+      setTotalMs(currentMs.current);
 
-      if (currentMs === 0) {
+      if (currentMs.current === 0) {
         resetValues();
         setTimerFinished(true);
         audioElem.current.play();
         interval.current = undefined;
       }
     }, 5);
-    console.log("Created interval:", interval.current);
   }
   
   function restartTimer() {

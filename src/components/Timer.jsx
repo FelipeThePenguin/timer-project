@@ -2,19 +2,22 @@ import { useRef, useEffect } from 'react';
 import { Input } from './Input';
 import './Timer.css';
 import { formatTime } from '../utils/formatTime';
+import { checkTimer } from '../utils/timerAllowed.js';
 
 export function Timer({ 
   totalMs, 
   setTotalMs, 
   timerPlaying,
   timerFinished, 
-  setAllowTimer,}) {
+  setTimerValues,
+  timerValues
+}) {
   const wheel = useRef(null);
   const spinner = useRef(null);
-  let originalTotalMs = useRef(totalMs);
+  let originalTotalMs = useRef(0);
   
   useEffect(() => {
-    originalTotalMs.current = totalMs;
+    originalTotalMs.current = checkTimer(timerValues).value;
   }, [timerPlaying]);
   
   useEffect(() => {
@@ -46,7 +49,7 @@ export function Timer({
         </p>
       : <Input 
           setTotalMs={setTotalMs}
-          setAllowTimer={setAllowTimer}/>
+          setTimerValues={setTimerValues}/>
      }
     </div>
     <div className="circle-container">
