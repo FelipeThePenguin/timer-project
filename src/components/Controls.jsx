@@ -6,8 +6,6 @@ export function Controls({
     setTotalMs,
     setTimerPlaying,
     timerPlaying,
-    setTimerFinished,
-    timerFinished,
     timerValues,
     setTimerValues
   }) {
@@ -18,7 +16,7 @@ export function Controls({
   
   function resetValues() {
     setTimerPlaying(false);
-    setTimerFinished(false);
+    setTotalMs(undefined);
     audioElem.current.play().then(() => {audioElem.current.pause()});
     
     clearInterval(interval.current);
@@ -29,12 +27,11 @@ export function Controls({
   }
   
   function toggleButton() {
-    if (timerFinished) {
+    if (totalMs == 0) {
       resetValues();
       return;
     }
-    
-    const currentInterval = interval.current;
+
     const timer = checkTimer(timerValues);
     
     if (!timer.isAllowed) {
@@ -56,7 +53,6 @@ export function Controls({
       setTotalMs(currentMs.current);
 
       if (currentMs.current === 0) {
-        setTimerFinished(true);
         audioElem.current.play();
         clearInterval(interval.current);
         interval.current = undefined;

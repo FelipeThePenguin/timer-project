@@ -4,9 +4,8 @@ import { Timer } from './components/Timer';
 import { Controls } from './components/Controls';
 
 function App() {
-  const [totalMs, setTotalMs] = useState(0);
+  const [totalMs, setTotalMs] = useState(undefined);
   const [timerPlaying, setTimerPlaying] = useState(false);
-  const [timerFinished, setTimerFinished] = useState(false);
   const [timerValues, setTimerValues] = useState({});
   
   return (
@@ -15,7 +14,6 @@ function App() {
       totalMs={totalMs}
       setTotalMs={setTotalMs}
       timerPlaying={timerPlaying}
-      timerFinished={timerFinished}
       setTimerValues={setTimerValues}
       timerValues={timerValues}
       />
@@ -24,8 +22,6 @@ function App() {
        setTotalMs={setTotalMs}
        setTimerPlaying={setTimerPlaying}
        timerPlaying={timerPlaying}
-       setTimerFinished={setTimerFinished}
-       timerFinished={timerFinished}
        timerValues={timerValues}
        setTimerValues={setTimerValues}
       />

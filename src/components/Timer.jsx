@@ -43,9 +43,9 @@ export function Timer({
    <div className="timer-container" >
      {timerPlaying 
       ? <p>
-         {timerFinished
+         {totalMs == 0
           ? 'Timer has expired'
-          : formatTime(totalMs)}
+          : formatTime(totalMs ?? 0)}
         </p>
       : <Input 
           setTotalMs={setTotalMs}
