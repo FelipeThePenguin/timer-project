@@ -1,5 +1,8 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { checkTimer } from '../utils/timerAllowed.js';
+import { BellIcon } from './icons/BellIcon.jsx';
+import { RestartIcon } from './icons/RestartIcon.jsx';
+import { MainIcon } from './icons/MainIcon.jsx';
 
 export function Controls({ 
     totalMs,
@@ -13,6 +16,7 @@ export function Controls({
   const audioElem = useRef(null);
   let interval = useRef(undefined);
   let currentMs = useRef(undefined);
+  const [currentIcon, setCurrentIcon] = useState('play');
   
   function resetValues() {
     setTimerPlaying(false);
@@ -24,6 +28,7 @@ export function Controls({
     currentMs.current = undefined;
     audioElem.current.currentTime = 0;
     setTimerValues({});
+    setCurrentIcon('play');
   }
   
   function toggleButton() {
@@ -45,14 +50,17 @@ export function Controls({
     if (interval.current) {
       clearInterval(interval.current);
       interval.current = undefined;
+      setCurrentIcon('play');
       return;
     }
     
+    setCurrentIcon('pause');
     interval.current = setInterval(() => {
       currentMs.current -= 5;
       setTotalMs(currentMs.current);
 
       if (currentMs.current === 0) {
+        setCurrentIcon('reset');
         audioElem.current.play();
         clearInterval(interval.current);
         interval.current = undefined;
@@ -79,9 +87,15 @@ export function Controls({
   
   return (
     <div>
-      <button onClick={resetValues}>Restart</button>
-      <button onClick={toggleButton}>Play</button>
-      <button onClick={setSound}>Sound</button>
+      <button onClick={resetValues}>
+        <RestartIcon />
+      </button>
+      <button onClick={toggleButton}>
+        <MainIcon current={currentIcon}/>
+      </button>
+      <button onClick={setSound}>
+        <BellIcon />
+      </button>
       <input 
        type="file" 
        allow="audio/*" 

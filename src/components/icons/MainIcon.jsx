@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import './MainIcon.css';
 
 const PlayIcon = (
@@ -23,30 +23,31 @@ const PauseIcon = (
 </svg>
 );
 
+const ResetIcon = (
+ <svg
+  viewBox="0 0 483.48 483.48"
+  fill="currentColor"
+  className="mainIcon"
+>
+  <path d="M361.08 0H122.4C54.799 0 0 54.798 0 122.4v238.68c0 67.602 54.799 122.4 122.4 122.4h238.68c67.602 0 122.4-54.799 122.4-122.4V122.4C483.48 54.798 428.682 0 361.08 0Z" />
+</svg>
+);
+
+const icons = {
+  "play": PlayIcon,
+  "pause": PauseIcon,
+  "reset": ResetIcon
+}
+
 export function MainIcon({
-  timerState
+  current
 }) 
 {
-  let currentIcon = useRef(PlayIcon);
-  
-  function changeState() {
-    if (timerState === 'play') {
-      currentIcon.current = PlayIcon;
-      return;
-    } else if (timerState === 'pause') {
-      currentIcon.current = PauseIcon;
-      return;
-    }
-  }
-  
-  useEffect(() => {
-    changeState();
-    console.log(timerState);
-  }, [timerState]);
+  let currentIcon = icons[current];
   
   return (
    <>
-     {currentIcon.current}
+     {currentIcon}
    </>
   );
 }
