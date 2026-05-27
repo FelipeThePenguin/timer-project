@@ -5,12 +5,11 @@ export function checkTimer(inputValues) {
   for (let i = 0; i < inputValues.length; i++) {
       const time = inputValues[i];
       if (
-          Number(time) > 100 || 
+          Number(time) > 61 || 
           Number(time) < 0 || 
           isFloat(Number(time))
          ) {
-        alert('Reject Timer, input too crazy');
-        return {isAllowed: false, reason: "All inputs must have a value that is between 0-99 and is not a float value"};
+        return {isAllowed: false, reason: "All inputs must have a value that is between 0-60 and is not a float value"};
       }
   }
     

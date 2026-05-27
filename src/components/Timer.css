@@ -16,6 +16,7 @@
   align-items: center;
   border-radius: 50%;
   position: relative;
+  margin-top: 20px;
 }
 
 .circle-container {
@@ -33,4 +34,8 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
+}
+
+.timer-clock {
+  font-size: 24px;
 }

@@ -3,6 +3,7 @@ import { checkTimer } from '../utils/timerAllowed.js';
 import { BellIcon } from './icons/BellIcon.jsx';
 import { RestartIcon } from './icons/RestartIcon.jsx';
 import { MainIcon } from './icons/MainIcon.jsx';
+import './Controls.css';
 
 export function Controls({ 
     totalMs,
@@ -86,14 +87,14 @@ export function Controls({
   }
   
   return (
-    <div>
-      <button onClick={resetValues}>
+    <div className="button-container">
+      <button onClick={resetValues} className="small-button">
         <RestartIcon />
       </button>
-      <button onClick={toggleButton}>
+      <button onClick={toggleButton} className="main-button">
         <MainIcon current={currentIcon}/>
       </button>
-      <button onClick={setSound}>
+      <button onClick={setSound} className="small-button">
         <BellIcon />
       </button>
       <input 

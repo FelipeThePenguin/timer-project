@@ -1,3 +1,14 @@
+@font-face {
+  src: url("../public/fonts/calibri.ttf");
+  font-family: Calibri;
+}
+
 body {
   margin: 0;
+  background: #FDFDFD;
+  font-family: Calibri;
+}
+
+span {
+  display: inline-block;
 }

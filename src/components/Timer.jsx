@@ -22,7 +22,10 @@ export function Timer({
   
   useEffect(() => {
     const timeLapsed = totalMs;
-    const percentage = (timeLapsed / originalTotalMs.current) * 100;
+    const percentage = 
+     totalMs !== undefined 
+      ? (timeLapsed / originalTotalMs.current) * 100 
+      : 100;
     
     wheel.current.style.backgroundImage = `
      conic-gradient(
@@ -42,9 +45,9 @@ export function Timer({
   <div className="wheel" ref={wheel}>
    <div className="timer-container" >
      {timerPlaying 
-      ? <p>
+      ? <p className="timer-clock">
          {totalMs == 0
-          ? 'Timer has expired'
+          ? 'Timer has expired!'
           : formatTime(totalMs ?? 0)}
         </p>
       : <Input 

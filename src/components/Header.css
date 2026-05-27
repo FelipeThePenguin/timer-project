@@ -1,0 +1,16 @@
+.project-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.timer-header {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.more-icon {
+  height: 18px;
+}

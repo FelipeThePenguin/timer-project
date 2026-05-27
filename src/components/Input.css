@@ -4,3 +4,17 @@
   justify-content: center;
   align-items: center;
 }
+
+.timer-input {
+  width: 85px;
+  margin-bottom: 10px;
+  margin-right: 6px;
+  padding: 4px;
+}
+
+.input-container div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
