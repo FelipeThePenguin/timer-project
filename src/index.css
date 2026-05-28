@@ -1,5 +1,5 @@
 @font-face {
-  src: url("../public/fonts/calibri.ttf");
+  src: url("../fonts/calibri.ttf");
   font-family: Calibri;
 }
 
@@ -11,4 +11,8 @@ body {
 
 span {
   display: inline-block;
+}
+
+p {
+  margin: 0;
 }

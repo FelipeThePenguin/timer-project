@@ -10,10 +10,12 @@ export function Timer({
   timerPlaying,
   timerFinished, 
   setTimerValues,
-  timerValues
+  timerValues,
+  hue
 }) {
   const wheel = useRef(null);
   const spinner = useRef(null);
+  const color = `hsl(${hue}, 100%, 50%)`;
   let originalTotalMs = useRef(0);
   
   useEffect(() => {
@@ -29,7 +31,7 @@ export function Timer({
     
     wheel.current.style.backgroundImage = `
      conic-gradient(
-      red 0%, red ${percentage}%,
+      ${color} 0%, ${color} ${percentage}%,
       transparent 0%, transparent ${100 - percentage}%
      )
     `;
@@ -39,7 +41,7 @@ export function Timer({
     if (totalMs === 0) {
       wheel.current.style.background = 'transparent';
     }
-  }, [totalMs]);
+  }, [totalMs, hue]);
     
   return (
   <div className="wheel" ref={wheel}>
@@ -56,10 +58,10 @@ export function Timer({
      }
     </div>
     <div className="circle-container">
-      <div className="circle"></div>
+      <div className="circle" style={{background: color}}></div>
     </div>
     <div className="circle-container" ref={spinner}>
-      <div className="circle"></div>
+      <div className="circle" style={{background: color}}></div>
     </div>
    </div>
   );

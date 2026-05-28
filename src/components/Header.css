@@ -14,3 +14,86 @@
 .more-icon {
   height: 18px;
 }
+
+.customization-anchor {
+  position: relative;
+  anchor-name: --customization;
+}
+
+.customization-options {
+  position: absolute;
+  position-anchor: --customization;
+  position-area: bottom left;
+  z-index: 999;
+  
+  display: none;
+  flex-direction: column;
+  
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  background: white;
+}
+
+.is-customizing .customization-options {
+  display: flex;
+}
+
+.customization-options button {
+  background: none;
+  border: none;
+  padding: 12px 22px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-container {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.75);
+}
+
+.editing-color .modal-container {
+  display: flex;
+}
+
+.modal-color {
+  background: white;
+  padding: 16px 20px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.color-message {
+  margin-bottom: 16px;
+}
+
+.selected-color {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+.color-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.color-buttons {
+  font-size: 14px;
+  font-weight: 900;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}

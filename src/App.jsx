@@ -8,17 +8,22 @@ function App() {
   const [totalMs, setTotalMs] = useState(undefined);
   const [timerPlaying, setTimerPlaying] = useState(false);
   const [timerValues, setTimerValues] = useState({});
+  const [hue, setHue] = useState(0);
   
   return (
     <div className="app-container">
       <div className="top-row">
-      <Header />
+      <Header
+      hue={hue}
+      setHue={setHue}
+      />
       <Timer 
       totalMs={totalMs}
       setTotalMs={setTotalMs}
       timerPlaying={timerPlaying}
       setTimerValues={setTimerValues}
       timerValues={timerValues}
+      hue={hue}
       />
       </div>
       <Controls 
