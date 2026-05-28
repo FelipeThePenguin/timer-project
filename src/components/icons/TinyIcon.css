@@ -1,0 +1,8 @@
+.tiny-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.dark-mode .tiny-icon {
+  color: #FDFDFD;
+}

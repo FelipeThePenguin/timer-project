@@ -9,6 +9,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 16px 0;
+  color: inherit;
 }
 
 .more-icon {
@@ -31,7 +32,11 @@
   
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-  background: white;
+  background: #FDFDFD;
+}
+
+.dark-mode .customization-options {
+  background: #121212;
 }
 
 .is-customizing .customization-options {
@@ -46,6 +51,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.customization-options button span {
+  margin-left: 6px;
 }
 
 .modal-container {
@@ -63,13 +72,18 @@
 }
 
 .modal-color {
-  background: white;
+  background: #FDFDFD;
   padding: 16px 20px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
   border-radius: 6px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.dark-mode .modal-color {
+  background: #121212;
+  color: #FDFDFD;
 }
 
 .color-message {

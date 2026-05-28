@@ -9,13 +9,18 @@ function App() {
   const [timerPlaying, setTimerPlaying] = useState(false);
   const [timerValues, setTimerValues] = useState({});
   const [hue, setHue] = useState(0);
+  const [darkMode, setDarkMode] = useState(true);
+  
+  const onDarkMode = darkMode ? 'dark-mode' : '';
   
   return (
-    <div className="app-container">
+    <div className={`app-container ${onDarkMode}`}>
       <div className="top-row">
       <Header
       hue={hue}
       setHue={setHue}
+      darkMode={darkMode}
+      setDarkMode={setDarkMode}
       />
       <Timer 
       totalMs={totalMs}

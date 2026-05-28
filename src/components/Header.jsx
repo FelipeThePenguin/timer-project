@@ -14,7 +14,7 @@ const moreIcon = (
  </svg>
 );
 
-export function Header({hue, setHue}) {
+export function Header({hue, setHue, darkMode, setDarkMode}) {
   const [isCustomizingTimer, setIsCustomizingTimer] = useState(false);
   const [isEditingColor, setIsEditingColor] = useState(false);
   const [selectedHue, setSelectedHue] = useState(hue);
@@ -38,8 +38,8 @@ export function Header({hue, setHue}) {
          <PaintIcon />
          <span>Paint</span>
         </button>
-       <button>
-         <ModeIcon />
+       <button onClick={() => setDarkMode(darkMode ? false : true)}>
+         <ModeIcon darkMode={darkMode} />
          <span>Mode</span>
        </button>
      </div>

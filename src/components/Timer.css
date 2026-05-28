@@ -6,6 +6,20 @@
   height: 260px;
   background: white;
   border-radius: 50%;
+  background: #fcfcfc;
+}
+
+.dark-mode .timer-container {
+  background: #121212;
+}
+
+.dark-mode input {
+  border: 1px solid #FDFDFD;
+  color: #FDFDFD;
+}
+
+.dark-mode input::placeholder {
+  color: #d1d0cd;
 }
 
 .wheel {
@@ -16,7 +30,9 @@
   align-items: center;
   border-radius: 50%;
   position: relative;
+  z-index: 1;
   margin-top: 20px;
+  anchor-name: --wheel;
 }
 
 .circle-container {
@@ -33,8 +49,55 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
+  position: relative;
 }
 
 .timer-clock {
   font-size: 24px;
+}
+
+.wheel-shadow {
+  filter: blur(5px);
+  position: absolute;
+  width: calc(100% + 5px);
+  height: calc(100% + 5px);
+  border-radius: 50%;
+  position-anchor: --wheel;
+  position-area: center;
+  display: none;
+}
+
+.dark-mode .wheel-shadow {
+  display: initial;
+}
+
+.circle-shadow {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+  position-area: center;
+  filter: blur(5px);
+  display: none;
+  opacity: 0.9;
+}
+
+.dark-mode .circle-shadow {
+  display: initial;
+}
+
+.circle-1 {
+  anchor-name: --circle1;
+}
+
+.circle-2 {
+  anchor-name: --circle2;
+}
+
+.circle-shadow-1 {
+  position-anchor: --circle1;
+}
+
+.circle-shadow-2 {
+  position-anchor: --circle2;
 }

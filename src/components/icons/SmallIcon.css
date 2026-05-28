@@ -1,0 +1,12 @@
+.small-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.dark-mode .small-icon {
+  color: #FDFDFD;
+}
+
+.small-icon:hover {
+  transform: scale(0.9);
+}

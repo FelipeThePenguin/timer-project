@@ -21,3 +21,7 @@
   background: #dedede;
   margin: 0 15px;
 }
+
+.dark-mode .main-button {
+  background: #222428;
+}

@@ -5,7 +5,6 @@
 
 body {
   margin: 0;
-  background: #FDFDFD;
   font-family: Calibri;
 }
 
@@ -13,6 +12,16 @@ span {
   display: inline-block;
 }
 
+.dark-mode span {
+  color: #FDFDFD;
+}
+
 p {
   margin: 0;
+}
+
+input {
+  background: transparent;
+  border: 1px solid #121212;
+  border-radius: 4px;
 }
