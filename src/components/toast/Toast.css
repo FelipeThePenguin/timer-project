@@ -1,0 +1,30 @@
+.toast-container {
+  position: fixed;
+  z-index: 1000;
+  bottom: 30px;
+  left: 20px;
+  right: 20px;
+  
+  background: #f2f2f2;
+  padding: 18px 22px;
+  border-radius: 12px;
+  display: none;
+  animation: grow 0.15s;
+}
+
+.dark-mode .toast-container {
+  background: #1b1b1b;
+}
+
+.toast-active .toast-container {
+  display: initial;
+}
+
+@keyframes grow {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}

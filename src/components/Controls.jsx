@@ -3,6 +3,7 @@ import { checkTimer } from '../utils/timerAllowed.js';
 import { BellIcon } from './icons/BellIcon.jsx';
 import { RestartIcon } from './icons/RestartIcon.jsx';
 import { MainIcon } from './icons/MainIcon.jsx';
+import { Toast } from './toast/Toast';
 import './Controls.css';
 
 export function Controls({ 
@@ -18,6 +19,18 @@ export function Controls({
   let interval = useRef(undefined);
   let currentMs = useRef(undefined);
   const [currentIcon, setCurrentIcon] = useState('play');
+  const [toastActive, setToastActive] = useState(false);
+  const toastTimeout = useRef(undefined);
+  const toastMessage = useRef(undefined);
+  
+  function callToast(message) {
+    toastMessage.current = message;
+    clearTimeout(toastTimeout.current);
+    setToastActive(true);
+    toastTimeout.current = setTimeout(() => {
+      setToastActive(false);
+    }, 2750);
+  }
   
   function resetValues() {
     setTimerPlaying(false);
@@ -41,7 +54,7 @@ export function Controls({
     const timer = checkTimer(timerValues);
     
     if (!timer.isAllowed) {
-      alert(timer.reason);
+      callToast(timer.reason);
       return;
     }
     
@@ -80,14 +93,17 @@ export function Controls({
   
   function setSound() {
     if (interval.current) {
-      console.log('Pause the timer first before adding an alarm sound');
+      callToast('Pause the timer first before adding an alarm sound');
+      
       return;
     }
     audioInput.current.click();
   }
   
+  const toastActiveClass = toastActive ? 'toast-active' : '';
+  
   return (
-    <div className="button-container">
+    <div className={`button-container ${toastActiveClass}`}>
       <button onClick={resetValues} className="small-button">
         <RestartIcon />
       </button>
@@ -108,6 +124,10 @@ export function Controls({
        loop
        ref={audioElem}
       />
+      <Toast 
+       message={toastMessage.current} 
+       toastTimeout={toastTimeout}
+       setToastActive={setToastActive}/>
     </div>
   );
 }
