@@ -38,7 +38,10 @@ export function Header({hue, setHue, darkMode, setDarkMode}) {
          <PaintIcon />
          <span>Paint</span>
         </button>
-       <button onClick={() => setDarkMode(darkMode ? false : true)}>
+       <button onClick={() => {
+       setDarkMode(darkMode ? false : true)
+       setIsCustomizingTimer(false);
+       }}>
          <ModeIcon darkMode={darkMode} />
          <span>Mode</span>
        </button>
@@ -57,6 +60,7 @@ export function Header({hue, setHue, darkMode, setDarkMode}) {
          <span onClick={() => 
          {setIsEditingColor(false);
           setHue(selectedHue);
+          setIsCustomizingTimer(false);
          }}>Set</span>
        </div>
        
