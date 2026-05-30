@@ -114,7 +114,7 @@ export function Controls({
       </button>
       <input 
        type="file" 
-       allow="audio/*" 
+       accept="audio/*" 
        style={{display: 'none'}}
        ref={audioInput}
        onChange={changeAudio}
