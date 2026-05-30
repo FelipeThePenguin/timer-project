@@ -1,19 +1,43 @@
 import { isFloat } from '../utils/types';
 
 export function checkTimer(inputValues) {
+  const hourValue = inputValues[0];
+  const minuteValue = inputValues[1];
+  const secondValue = inputValues[2];
+
+  if (
+    !hourValue &&
+    !minuteValue &&
+    !secondValue
+  ) {
+    return {isAllowed: false, reason: "Please enter a number in one of the inputs"};
+  }
   
-  for (let i = 0; i < inputValues.length; i++) {
-      const time = inputValues[i];
-      if (
-          Number(time) > 61 || 
-          Number(time) < 0 || 
-          isFloat(Number(time))
-         ) {
-        return {isAllowed: false, reason: "All inputs must have a value that is between 0-60 and is not a float value"};
-      }
+  if (
+    Number(hourValue) > 24 ||
+    Number(hourValue) < 0 ||
+    isFloat(Number(hourValue))
+  ) {
+   return {isAllowed: false, reason: "The input for the hour value must be between 0-23 and is not a decimal"};
+  }
+  
+if (
+    Number(minuteValue) > 60 ||
+    Number(minuteValue) < 0 ||
+    isFloat(Number(minuteValue))
+  ) {
+   return {isAllowed: false, reason: "The input for the minute value must be between 0-60 and is not a decimal"};
+}
+
+if (
+    Number(secondValue) > 60 ||
+    Number(secondValue) < 0 ||
+    isFloat(Number(secondValue))
+  ) {
+   return {isAllowed: false, reason: "The input for the second value must be between 0-60 and is not a decimal"};
   }
     
-  const totalSeconds = Number(inputValues[0]) * 3600 + Number(inputValues[1]) * 60 + Number(inputValues[2]);
+  const totalSeconds = Number(hourValue) * 3600 + Number(minuteValue) * 60 + Number(secondValue);
   
   if (totalSeconds * 1000 < 5000) {
     return {

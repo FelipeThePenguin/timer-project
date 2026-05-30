@@ -7,9 +7,9 @@ import { Header } from './components/Header';
 function App() {
   const [totalMs, setTotalMs] = useState(undefined);
   const [timerPlaying, setTimerPlaying] = useState(false);
-  const [timerValues, setTimerValues] = useState({});
+  const [timerValues, setTimerValues] = useState([]);
   const [hue, setHue] = useState(0);
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   
   const onDarkMode = darkMode ? 'dark-mode' : '';
   
