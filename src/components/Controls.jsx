@@ -10,7 +10,6 @@ export function Controls({
     totalMs,
     setTotalMs,
     setTimerPlaying,
-    timerPlaying,
     timerValues,
     setTimerValues
   }) {

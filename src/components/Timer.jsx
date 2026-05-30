@@ -6,9 +6,7 @@ import { checkTimer } from '../utils/timerAllowed.js';
 
 export function Timer({ 
   totalMs, 
-  setTotalMs, 
   timerPlaying,
-  timerFinished, 
   setTimerValues,
   timerValues,
   hue
@@ -22,7 +20,7 @@ export function Timer({
   
   useEffect(() => {
     originalTotalMs.current = checkTimer(timerValues).value;
-  }, [timerPlaying]);
+  }, [timerPlaying, timerValues]);
   
   useEffect(() => {
     const timeLapsed = totalMs;
@@ -46,7 +44,7 @@ export function Timer({
     if (totalMs === 0) {
       wheel.current.style.background = 'transparent';
     }
-  }, [totalMs, hue]);
+  }, [totalMs, hue, color]);
     
   return (
   <>
@@ -59,7 +57,6 @@ export function Timer({
           : formatTime(totalMs ?? 0)}
         </p>
       : <Input 
-          setTotalMs={setTotalMs}
           setTimerValues={setTimerValues}/>
      }
     </div>

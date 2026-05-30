@@ -2,8 +2,6 @@ import { useRef, useState } from 'react';
 import './Input.css';
 
 export function Input({ 
-  setTotalMs, 
-  setAllowTimer,
   setTimerValues
 }) {
   const [timeValue, setTimeValue] = useState({

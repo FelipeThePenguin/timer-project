@@ -35,7 +35,6 @@ function App() {
        totalMs={totalMs}
        setTotalMs={setTotalMs}
        setTimerPlaying={setTimerPlaying}
-       timerPlaying={timerPlaying}
        timerValues={timerValues}
        setTimerValues={setTimerValues}
       />

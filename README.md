@@ -1,12 +1,15 @@
-# React + Vite
+## Timer Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to my **timer project!** :D
+*(My first coding project that I have finished)*
 
-Currently, two official plugins are available:
+It has thede features:
+1. Color Changer
+1. Light / Dark Mode
+1. Custom alarm sounds
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I will be adding these features soon:
+* Cooler input slider
+* Responsive layout
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Feel free to give comments, criticism, and ideas. Report bugs or issues if there are any. Enjoy exploring my project!
