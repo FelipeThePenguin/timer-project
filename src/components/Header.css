@@ -1,6 +1,10 @@
 .project-title {
   font-weight: bold;
   font-size: 1.5rem;
+  
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .timer-header {
@@ -12,8 +16,20 @@
   color: inherit;
 }
 
-.more-icon {
+.header-icon {
   height: 18px;
+}
+
+.github-icon {
+  height: 24px;
+  margin-left: 10px;
+}
+
+.github-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 4px;
 }
 
 .customization-anchor {
@@ -32,12 +48,13 @@
   
   border-radius: 6px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  background: #FDFDFD;
+  background: #f2f2f2;
   overflow: hidden;
 }
 
 .dark-mode .customization-options {
-  background: #121212;
+  background: #1b1b1b;
+  box-shadow: 0 0 20px rgba(20, 20, 20, 0.5);
 }
 
 .is-customizing .customization-options {
