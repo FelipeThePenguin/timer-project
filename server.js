@@ -2,8 +2,10 @@ import express from 'express';
 
 const app = express();
 
+app.set('view engine', 'ejs');
+
 app.get("/", (req, res) => {
-  res.render("dist/index");
+  res.sendFile("dist/index.html");
 });
 
 app.listen(3000, () => {
