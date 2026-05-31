@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@uiw/react-color-hue": "^2.10.3",
-    "ejs": "^6.0.1",
     "express": "^5.2.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
